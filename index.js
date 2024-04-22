@@ -26,9 +26,9 @@ const swaggerOptions = {
 };
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
 
-//ROUTES POKEMON
-//const routesPokemon = require('./routes/routes_pokemon.js');
-//app.use('/api/pokemon/', routesPokemon);
+//ROUTES Tâches
+const routesTaches = require('./routes/routes_taches');
+app.use('/api/taches/', routesPokemon);
 
 
 app.listen(PORT, () => {
