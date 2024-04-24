@@ -7,7 +7,8 @@ const db = require("../.src/config/db_pg.js");
 //équivalent du main
 module.exports = {
 
-    obtenirTousTacheDB: () => {
+    obtenirTousTachesDB: () => {
+        console.log("TRE");
         return new Promise((resolve, reject) => {    
             const query = 'SELECT * FROM taches ORDER BY id';
             db.query(query, (err, result) => {

@@ -6,6 +6,7 @@ const model = require('../models/tache.model.js');
 module.exports = {
 
     afficherTousTaches: (req, res) => {
+        console.log("SEK");
         model.obtenirTousTachesDB()
             .then(result => {
                 res.send(result);
