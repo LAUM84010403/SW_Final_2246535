@@ -1,5 +1,0 @@
-
-node_modules/.bin/nodemon
-node_modules/.bin/nodetouch
-node_modules/.bin/nopt
-node_modules/.bin/semver
