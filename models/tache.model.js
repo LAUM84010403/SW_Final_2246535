@@ -6,7 +6,12 @@ const db = require("../.src/config/db_pg.js");
 
 //équivalent du main
 module.exports = {
+<<<<<<< HEAD
     obtenirTousTachesDB: () => {
+=======
+
+    obtenirTousTacheDB: () => {
+>>>>>>> parent of 5d53001 (débog)
         return new Promise((resolve, reject) => {    
             const query = 'SELECT * FROM taches ORDER BY id';
             db.query(query, (err, result) => {
