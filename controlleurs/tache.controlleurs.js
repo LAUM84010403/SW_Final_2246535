@@ -6,12 +6,6 @@ const model = require('../models/tache.model.js');
 module.exports = {
 
     afficherTousTaches: (req, res) => {
-        const queryParams = req.query;
-
-        if(!queryParams.code) {
-            console.log('Nom :', req.query.code);
-        return;
-    }
 
         model.obtenirTousTacheDB()
             .then(result => {
@@ -25,3 +19,17 @@ module.exports = {
 
 
 };
+
+
+/*
+AIDE MÉMOIRE
+const queryParams = req.query;
+if(queryParams.code) {
+console.log('Nom :', req.query.code);
+return;
+}
+
+
+
+
+*/
