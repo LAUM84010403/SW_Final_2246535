@@ -6,6 +6,13 @@ const model = require('../models/tache.model.js');
 module.exports = {
 
     afficherTousTaches: (req, res) => {
+        const queryParams = req.query;
+
+        if(!queryParams.code) {
+            console.log('Nom :', req.query.code);
+        return;
+    }
+
         model.obtenirTousTacheDB()
             .then(result => {
                 res.send(result);
@@ -15,12 +22,6 @@ module.exports = {
                 res.status(500).json({ error: 'Erreur serveur' });
             });
     }
-
-
-
-
-
-
 
 
 };
