@@ -7,7 +7,14 @@ module.exports = {
 
     afficherTousTaches: (req, res) => {
 
-        model.obtenirTousTacheDB()
+        const queryParams = req.query;
+        if(!queryParams.id) {
+            res.status(400);
+            res.send('Il manque le ID utilisateur; "/api/tache/id?id=?"');
+        return;
+        }
+
+        model.obtenirTousTacheDB(queryParams.id)
             .then(result => {
                 res.send(result);
             })
@@ -23,11 +30,6 @@ module.exports = {
 
 /*
 AIDE MÉMOIRE
-const queryParams = req.query;
-if(queryParams.code) {
-console.log('Nom :', req.query.code);
-return;
-}
 
 
 
