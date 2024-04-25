@@ -7,16 +7,16 @@ const db = require("../.src/config/db_pg.js");
 //équivalent du main
 module.exports = {
 
-    obtenirTousTacheDB: (userID, complet) => {
-        return new Promise((resolve, reject) => {    
-                if(complet){
+    obtenirTousTacheDB: (userID, complete) => {
+        return new Promise((resolve, reject) => { 
+                
+            const query = 'SELECT * FROM taches WHERE utilisateur_id = $1 AND complete = false ORDER BY id;';
+                const values = [userID]   
+                if(complete != null){
                     const query = 'SELECT * FROM taches WHERE utilisateur_id = $1 ORDER BY id;';
                     const values = [userID]
                 }
-                else{
-                    const query = 'SELECT * FROM taches WHERE utilisateur_id = $1 AND complete = false ORDER BY id;';
-                    const values = [userID]
-                }
+    
 
             db.query(query, values, (err, result) => {
                 if (err) {
