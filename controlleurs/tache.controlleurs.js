@@ -13,8 +13,12 @@ module.exports = {
             res.send('Il manque le ID utilisateur; "/api/tache/id?id=?"');
         return;
         }
+        if(!queryParams.complete) {
+            console.log('complete manquant');
+        return;
+        }
 
-        model.obtenirTousTacheDB(queryParams.id, queryParams.complet)
+        model.obtenirTousTacheDB(queryParams.id, queryParams.complete)
             .then(result => {
                 res.send(result);
             })
