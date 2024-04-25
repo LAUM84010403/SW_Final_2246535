@@ -7,29 +7,27 @@ const db = require("../.src/config/db_pg.js");
 //équivalent du main
 module.exports = {
 
-    obtenirTousTacheDB: (userID, complete) => {
+    obtenirTousTacheDB: (userID, isComplete) => {
         return new Promise((resolve, reject) => { 
                 
-            const query = 'SELECT * FROM taches WHERE utilisateur_id = $1 AND complete = false ORDER BY id;';
-                const values = [userID]   
-                if(complete != null){
-                    const query = 'SELECT * FROM taches WHERE utilisateur_id = $1 ORDER BY id;';
-                    const values = [userID]
-                }
-    
+            const query = isComplete ? 'SELECT * FROM taches WHERE utilisateur_id = $1 AND complete = true ORDER BY id;'
+                                     : 'SELECT * FROM taches WHERE utilisateur_id = $1 ORDER BY id;';
+            const values = [userID];
 
-            db.query(query, values, (err, result) => {
-                if (err) {
-                    console.log('Erreur sqlState : ' + err);
-                    console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
-                    reject(err);
-                }
+        db.query(query, values, (err, result) => {
+            if (err) {
+                console.log('Erreur sqlState : ' + err);
+                console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
+                reject(err);
+            }
 
-                resolve(result.rows);
-            });
+            resolve(result.rows);
         });
+        })
     },
 
+
+    
 
 
 };
