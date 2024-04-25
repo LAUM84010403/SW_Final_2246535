@@ -9,7 +9,7 @@ module.exports = {
 
     obtenirTousTacheDB: (userID) => {
         return new Promise((resolve, reject) => {    
-            const query = 'SELECT * FROM taches ORDER BY id WHERE utilisateur_id = $1';
+            const query = 'SELECT * FROM taches WHERE utilisateur_id = $1 ORDER BY id;';
             const values = [userID]
 
             db.query(query, values, (err, result) => {
