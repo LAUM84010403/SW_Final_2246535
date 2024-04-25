@@ -14,7 +14,7 @@ module.exports = {
         return;
         }
 
-        model.obtenirTousTacheDB(queryParams.id)
+        model.obtenirTousTacheDB(queryParams.id, queryParams.complet)
             .then(result => {
                 res.send(result);
             })
