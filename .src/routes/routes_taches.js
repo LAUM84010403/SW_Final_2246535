@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 
 //CRÉER UNE TACHE
-router.get('/', controllerTache.inventerTache)
+router.post('/', controllerTache.inventerTache)
 
 //AFFICHER TOUTES LES TÂCHES
 router.get('/tous', controllerTache.afficherTousTaches);
