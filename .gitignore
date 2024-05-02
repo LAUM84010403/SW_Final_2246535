@@ -1,2 +1,6 @@
 .env
 .src/config/BackupDB.txt
+
+
+node_modules/
+middlewares/
