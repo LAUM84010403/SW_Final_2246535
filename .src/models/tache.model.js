@@ -27,7 +27,7 @@ module.exports = {
     },
 
 
-    chercherUtilisateur: (api_cle) => {
+    trouverUsagerBD: (api_cle) => {
         return new Promise((resolve, reject) => {
             const requete = `SELECT id FROM utilisateur WHERE cle_api = $1`;
             const params = [api_cle];
