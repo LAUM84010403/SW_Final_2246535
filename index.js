@@ -4,6 +4,7 @@ console.log("Je suis prêt à commencer");
 
 const express = require('express');
 const app = express();
+const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +25,7 @@ const swaggerOptions = {
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
 
 //ROUTES Tâches
+console.log("FIR")
 const routesTaches = require('./routes/routes_taches');
 app.use('/api/taches/', routesTaches);
 
