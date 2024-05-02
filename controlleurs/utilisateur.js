@@ -30,7 +30,7 @@ module.exports = {
         Utilisateurs.ajouterUtilisateurBD(req)
                 .then(utilisateur => {
                     res.status(200).json({
-                        message: [req.body.prenom]+ " " +[req.body.nom] + " a été ajouté avec succès comme utilisateur", "cle_api": Utilisateur })
+                        message: [req.body.prenom]+ " " +[req.body.nom] + " a été ajouté avec succès comme utilisateur", "cle_api": utilisateur })
                 })
                 .catch((erreur) => {
                     console.log('Erreur : ', erreur);
