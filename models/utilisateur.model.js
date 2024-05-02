@@ -10,8 +10,8 @@ module.exports = {
     return new Promise((resolve, reject) => {
         const cle = uuidv4.v4();
         const mdpHash = bcrypt.hash(req.body.mot_de_passe)
-        const query = `INSERT INTO utilisateur(nom, prenom, courriel, password, cle_api) VALUES ($1, $2, $3, $4, $5)`;    
-        const params = [req.body.nom, req.body.prenom, req.body.courriel, mdpHash, cle];
+        const query = `INSERT INTO utilisateur(nom, prenom, courriel, cle_api, password) VALUES ($1, $2, $3, $4, $5)`;    
+        const params = [req.body.nom, req.body.prenom, req.body.courriel, cle, mdpHash];
         
 
             db.query(query, params, (err, resultat) => {
