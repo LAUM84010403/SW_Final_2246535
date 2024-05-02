@@ -20,9 +20,11 @@ console.log("SEK");
 router.get('/tous', controllerTache.afficherTousTaches);
 
 router.post('/utilisateurs', controllerUtilisateur.ajouterUnUtilisateur)
+console.log("TRE");
 router.get('/utilisateurs', (req, res) => {
     res.send("<h1>Utilisateur, page!</h1>")
 });
+console.log("FUR");
 
 //Afficher Page
 module.exports = router;
