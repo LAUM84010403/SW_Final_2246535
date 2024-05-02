@@ -1,6 +1,7 @@
 // MANIPULATION(model) DE LA BASE DE DONNÉ POUR L'API Tâches(Utilisateurs)
 
 const bcrypt = require('bcrypt');
+const uuidv4 = require('uuid');
 //Base de donnée
 const db = require("../.src/config/db_pg.js");
 
