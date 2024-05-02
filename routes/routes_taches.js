@@ -15,16 +15,15 @@ router.get('/', (req, res) => {
     res.send("<h1>BOJUR SUL MON HAPI!</h1>")
 });
 
-console.log("SEK");
+
 //AFFICHER TOUTES LES TÂCHES
-router.get('/tous', controllerTache.afficherTousTaches);
+router.get('/utilisateurs', controllerTache.afficherTousTaches);
 
 router.post('/utilisateurs', controllerUtilisateur.ajouterUnUtilisateur)
-console.log("TRE");
-router.get('/utilisateurs', (req, res) => {
+
+router.get('/tous', (req, res) => {
     res.send("<h1>Utilisateur, page!</h1>")
 });
-console.log("FUR");
 
 //Afficher Page
 module.exports = router;
