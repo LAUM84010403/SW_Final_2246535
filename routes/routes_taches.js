@@ -17,11 +17,11 @@ router.get('/', (req, res) => {
 
 
 //AFFICHER TOUTES LES TÂCHES
-router.get('/utilisateurs', controllerTache.afficherTousTaches);
+router.get('/tous', controllerTache.afficherTousTaches);
 
-router.post('/utilisateurs', controllerUtilisateur.ajouterUnUtilisateur)
+router.post('/usager', controllerUtilisateur.ajouterUnUtilisateur)
 
-router.get('/tous', (req, res) => {
+router.get('/usager', (req, res) => {
     res.send("<h1>Utilisateur, page!</h1>")
 });
 
