@@ -2,3 +2,4 @@
 .src/config/BackupDB
 node_modules/
 middlewares/
+test/
