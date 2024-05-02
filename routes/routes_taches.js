@@ -6,7 +6,8 @@ const router = express.Router();
 const app = express();
 
 //controlleurs
-const controller = require('../controlleurs/tache.controlleurs.js');
+const controllerTache = require('../controlleurs/tache.controlleurs.js');
+const controllerUtilisateur = require('../controlleurs/utilisateur.js');
 
 
 //PAGE D'ACCEUIL DE /api/taches
@@ -16,8 +17,8 @@ router.get('/', (req, res) => {
 
 
 //AFFICHER TOUTES LES TÂCHES
-router.get('/tous', controller.afficherTousTaches);
-
+router.get('/tous', controllerTache.afficherTousTaches);
+router.post('/', controllerUtilisateur.ajouterUnUtilisateur)
 
 
 //Afficher Page
