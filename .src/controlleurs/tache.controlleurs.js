@@ -60,8 +60,9 @@ inventerTache: (req, res) => {
             });
             return;
         };
-
-        model.trouverUsagerBD(req.headers.authorization)
+        console.log(req.headers.Authorization)
+        model.trouverUsagerBD(req.headers.Authorization)
+        
         .then((resultat) => {
             model.creerTacheBD(req, resultat[0].id)
             .then((tache) => {
