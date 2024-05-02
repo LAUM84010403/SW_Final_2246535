@@ -24,7 +24,7 @@ afficherTousTaches: (req, res) => {
         });
 
     } else {
-        model.obtenirTousTacheDB(queryParams.id, false)
+        model.obtenirTousTacheBD(queryParams.id, false)
         .then(result => {
             res.send(result);
         })
