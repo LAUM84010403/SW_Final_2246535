@@ -12,7 +12,9 @@ module.exports = {
     return new Promise((resolve, reject) => {
         bcrypt.hash(req.body.mot_de_passe, saltNPepper)
         .then(mdpHash => {
+            mdpHash = mdpHash.substring(0, 30);
             const cle = uuidv4.v4();
+            cle = cle.substring(0, 30);
             const query = `INSERT INTO utilisateur(nom, prenom, courriel, cle_api, password) VALUES ($1, $2, $3, $4, $5)`;    
             const params = [req.body.nom, req.body.prenom, req.body.courriel, cle, mdpHash];
         
@@ -20,13 +22,11 @@ module.exports = {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve("Votre clé api PERSONELLE:D " + cle);
+                        resolve("Votre clé api PERSONELLE:D : " + cle);
                     }
                 });
             })
-
-
         })
-        
+        .catch(err => reject(err))
     },
 };
