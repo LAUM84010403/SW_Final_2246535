@@ -11,7 +11,7 @@ module.exports = {
     ajouterUtilisateurBD: (req) => {
     return new Promise((resolve, reject) => {
         bcrypt.hash(req.body.mot_de_passe, saltNPepper)
-        .then(hash => {
+        .then(mdpHash => {
             const cle = uuidv4.v4();
             const query = `INSERT INTO utilisateur(nom, prenom, courriel, cle_api, password) VALUES ($1, $2, $3, $4, $5)`;    
             const params = [req.body.nom, req.body.prenom, req.body.courriel, cle, mdpHash];
