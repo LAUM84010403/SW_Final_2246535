@@ -25,7 +25,6 @@ const swaggerOptions = {
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerOptions));
 
 //ROUTES Tâches
-console.log("FIR")
 const routesTaches = require('./.src/routes/routes_taches');
 app.use('/api/taches/', routesTaches);
 
