@@ -1,7 +1,7 @@
 // CODAGE(controlleurs) DE L'API Tâches
 
 //appel des manipulation de la base de donnée
-const model = require('../models/tache.model.js');
+const model = require('../models/tache.model');
 
 module.exports = {
 
