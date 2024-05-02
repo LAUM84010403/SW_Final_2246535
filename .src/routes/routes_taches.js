@@ -16,11 +16,15 @@ router.get('/', (req, res) => {
 });
 
 
+//CRÉER UNE TACHE
+router.get('/', controllerTache.inventerTache)
+
 //AFFICHER TOUTES LES TÂCHES
 router.get('/tous', controllerTache.afficherTousTaches);
 
+//AJOUTER UN UTILISATEUR
 router.post('/usager', controllerUtilisateur.ajouterUnUtilisateur)
-
+//SITE DE USAGER
 router.get('/usager', (req, res) => {
     res.send("<h1>Utilisateur, page!</h1>")
 });

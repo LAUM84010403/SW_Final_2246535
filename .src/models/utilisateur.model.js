@@ -1,10 +1,12 @@
 // MANIPULATION(model) DE LA BASE DE DONNÉ POUR L'API Tâches(Utilisateurs)
 
+//Module
 const bcrypt = require('bcrypt');
 const saltNPepper = 10;
 const uuidv4 = require('uuid');
+
 //Base de donnée
-const db = require("../.src/config/db_pg.js");
+const db = require("../config/db_pg.js");
 
 //équivalent du main
 module.exports = {
@@ -20,6 +22,8 @@ module.exports = {
         
             db.query(query, params, (err, resultat) => {
                     if (err) {
+                        console.log('Erreur sqlState : ' + err);
+                        console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
                         reject(err);
                     } else {
                         resolve("Votre clé api PERSONELLE:D : " + cle);

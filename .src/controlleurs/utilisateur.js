@@ -1,31 +1,29 @@
 const Utilisateurs = require("../models/utilisateur.model");
-const bcrypt = require('bcrypt');
 
 module.exports = {
 
     ajouterUnUtilisateur: (req, res) => {
-        let message = "";
+        let msgErreur = "";
         if (!req.body.nom) {
-            message += "nom, ";
+            msgErreur += "nom, ";
         }
         if (!req.body.prenom) {
-            message += "prenom, ";
+            msgErreur += "prenom, ";
         }
         if (!req.body.courriel) {
-            message += "courriel, ";
+            msgErreur += "courriel, ";
         }
         if (!req.body.mot_de_passe) {
-            message += "mot_de_passe, ";
+            msgErreur += "mot_de_passe, ";
         }
         
-        if (message !== "") {
+        if (msgErreur !== "") {
             res.status(400).json({
                 erreur: "Certains champs sont manquants",
-                champs_manquants: message
+                champs_manquants: msgErreur
             });
             return;
         } 
-
 
         Utilisateurs.ajouterUtilisateurBD(req)
                 .then(utilisateur => {
@@ -39,5 +37,9 @@ module.exports = {
                         message: "echec lors de la creation de " + [req.body.prenom]+ " " +[req.body.nom]
                     });
                 });
-        }
+        },
+
+        
+
+
 };
