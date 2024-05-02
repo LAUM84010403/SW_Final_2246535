@@ -22,6 +22,5 @@ module.exports = {
                     }
                 });
             })
-            .catch(err => reject(err));
     },
 };
