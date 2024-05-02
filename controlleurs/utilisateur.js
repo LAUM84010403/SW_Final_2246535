@@ -36,7 +36,7 @@ module.exports = {
                     console.log('Erreur : ', erreur);
                     res.status(500)
                     res.send({
-                        message: "echec lors de la creation de " + [req.body.prenom]+" " +[req.body.nom]
+                        message: "echec lors de la creation de " + [req.body.prenom]+ " " +[req.body.nom] + err
                     });
                 });
         }
