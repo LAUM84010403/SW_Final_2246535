@@ -60,11 +60,11 @@ inventerTache: (req, res) => {
             });
             return;
         };
-        console.log(req.headers.Authorization)
-        model.trouverUsagerBD(req.headers.Authorization)
+        console.log(req.headers.authorization)
+        model.trouverUsagerBD(req.headers.authorization)
         
         .then((resultat) => {
-            model.creerTacheBD(req, resultat[0].id)
+            model.creerTacheBD(req, resultat)
             .then((tache) => {
                 res.send({ message: "la tache " + req.body.titre + " à été ajouter avec succès" });
             })
