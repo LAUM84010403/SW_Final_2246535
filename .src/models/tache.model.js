@@ -32,7 +32,7 @@ module.exports = {
             const requete = `SELECT id FROM utilisateur WHERE cle_api = $1`;
             const params = [api_cle];
     
-            sql.query(requete, params, (err, resultat) => {
+            db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log('Erreur sqlState : ' + err);
                     console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
@@ -47,7 +47,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             const requete = `INSERT INTO taches (utilisateur_id, titre, description, date_debut, date_echeance, complete) VALUES ($1, $2, $3, $4, $5, $6)`;
             const params = [user_id, req.body.titre, req.body.description, req.body.date_debut, req.body.date_echeance, req.body.complete];
-            sql.query(requete, params, (err, resultat) => {
+            db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log('Erreur sqlState : ' + err);
                     console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
