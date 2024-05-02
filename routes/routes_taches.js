@@ -15,10 +15,11 @@ router.get('/', (req, res) => {
     res.send("<h1>BOJUR SUL MON HAPI!</h1>")
 });
 
-
+console.log("SEK");
 //AFFICHER TOUTES LES TÂCHES
 router.get('/tous', controllerTache.afficherTousTaches);
-router.post('/', controllerUtilisateur.ajouterUnUtilisateur)
+
+router.post('/utilisateurs', controllerUtilisateur.ajouterUnUtilisateur)
 
 
 //Afficher Page
