@@ -3,10 +3,7 @@
 console.log("Je suis prêt à commencer");
 
 const express = require('express');
-
-const router = express.Router();
 const app = express();
-const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

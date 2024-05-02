@@ -6,6 +6,7 @@ const model = require('../models/tache.model.js');
 module.exports = {
 
     afficherTousTaches: (req, res) => {
+        console.log("TRE");
     const queryParams = req.query;
     if (!queryParams.id) {
         res.status(400);
