@@ -1,6 +1,6 @@
 .env
-.src/config/BackupDB.txt
+.src/config/BackupDB
 
 
 node_modules/
-.src/config/BackupDB
+middlewares/
