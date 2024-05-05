@@ -116,33 +116,35 @@ modifierTache: (req,res) => {
     modelTache.trouverTacheBD(req.body.id)
     .then(resultat => {
         modelTache.modifierUneTacheBD(req)
-        .then((tache) => {
-            res.send({ message: "La tâche " + [req.params.id] + " fût modifier avec succès!", 
-            tache: { 
-                id: req.params.id, 
-                titre: req.body.titre, 
-                description: req.body.desciption, 
-                date_debut: req.body.date_debut, 
-                date_echeance: req.body.date_echeance, 
-                complet: req.body.complete } 
+            .then((tache) => {
+                res.send({
+                    message: "La tâche " + [req.params.id] + " fût modifiée avec succès!",
+                    tache: {
+                        id: req.params.id,
+                        titre: req.body.titre,
+                        description: req.body.description, // "desciption" corrigé en "description"
+                        date_debut: req.body.date_debut,
+                        date_echeance: req.body.date_echeance,
+                        complet: req.body.complete
+                    }
+                });
             })
             .catch((erreur) => {
                 console.log('Erreur : ', erreur);
-                res.status(500)
+                res.status(500);
                 res.send({
-                    message: "Aucune tache n'existe avec ce ID, est-ce le bon? ID:" + [req.params.id]
+                    message: "Aucune tache n'existe avec cet ID, est-ce le bon? ID:" + [req.params.id]
                 });
             });
     })
     .catch((erreur) => {
         console.log('Erreur : ', erreur);
-        res.status(500)
+        res.status(500);
         res.send({
-            message: "la tâche n'existe pas, est-ce le bon ID:" + [req.params.id]
+            message: "La tâche n'existe pas, est-ce le bon ID:" + [req.params.id]
         });
-    })})
-    },
+    });
+},
 
 
-
-};
+}
