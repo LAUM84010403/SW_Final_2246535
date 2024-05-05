@@ -88,6 +88,11 @@ inventerTache: (req, res) => {
 
 changerTache: (req,res) => {
     var message = "";
+    //Paramètre et non pas body
+    if (!req.params.id) {
+        message += "id, ";
+    }
+
     if (!req.body.titre) {
         message += "titre, ";
     }
@@ -100,11 +105,8 @@ changerTache: (req,res) => {
     if (!req.body.date_echeance) {
         message += "date_echeance, ";
     }
-    if (req.body.complete == null) {
+    if (req.body.complet == null) {
         message += "complete, ";
-    }
-    if (!req.params.id) {
-        message += "id, ";
     }
     if (message != "") {
         res.status(400);
@@ -124,7 +126,7 @@ changerTache: (req,res) => {
                 description: req.body.desciption, 
                 date_debut: req.body.date_debut, 
                 date_echeance: req.body.date_echeance, 
-                complete: req.body.complete } 
+                complet: req.body.complete } 
             })
             .catch((erreur) => {
                 console.log('Erreur : ', erreur);
