@@ -65,7 +65,7 @@ inventerTache: (req, res) => {
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
         
         .then((resultat) => {
-            modelTache.creerTacheBD(req, resultat)
+            modelTache.creerTacheBD(req, resultat[0].id)
             .then((tache) => {
                 res.send({ message: req.body.titre + " à été créer en tant que tâche!" });
             })
