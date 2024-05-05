@@ -24,9 +24,9 @@ router.get('/usager', (req, res) => {
 });
 
 //CRÉER UNE TACHE
-router.post('/ajouter', controllerTache.inventerTache)
+router.post('/ajouter', controllerTache.creerTache)
 //MODIFIER TÂCHE
-router.post('/modifier', controllerTache.changerTache)
+router.post('/modifier', controllerTache.modifierTache)
 //MODIFIER TÂCHE STATUT
 ///router.post('/modifierStatut', controllerTache)
 //SUPPRIMER TÂCHE

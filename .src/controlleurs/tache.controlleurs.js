@@ -35,7 +35,7 @@ afficherTousTaches: (req, res) => {
     }},
 
 
-inventerTache: (req, res) => {
+creerTache: (req, res) => {
         let msgErreur = "";
         if (!req.body.titre) {
             msgErreur += "titre, ";
@@ -85,7 +85,7 @@ inventerTache: (req, res) => {
         });
     },
 
-changerTache: (req,res) => {
+modifierTache: (req,res) => {
     var message = "";
 
     if (!req.body.id) {
@@ -115,7 +115,7 @@ changerTache: (req,res) => {
     }
     modelTache.trouverTacheBD(req.body.id)
     .then(resultat => {
-        Taches.modifierUneTacheBD(req)
+        taches.modifierUneTacheBD(req)
         .then((tache) => {
             res.send({ message: "La tâche " + [req.params.id] + " fût modifier avec succès!", 
             tache: { 
