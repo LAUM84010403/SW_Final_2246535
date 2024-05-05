@@ -114,7 +114,7 @@ changerTache: (req,res) => {
         return;
     }
     modelTache.trouverTacheBD(req.body.id)
-    .then(resultat)
+    .then(resultat => {
         Taches.modifierUneTacheBD(req)
         .then((tache) => {
             res.send({ message: "La tâche " + [req.params.id] + " fût modifier avec succès!", 
@@ -140,23 +140,8 @@ changerTache: (req,res) => {
         res.send({
             message: "la tâche n'existe pas, est-ce le bon ID:" + [req.params.id]
         });
-    })
-
-
-
-
-
-
-    .catch((erreur) =>{
-        console.error('Un erreur est survenue au moment de la récupération des tâches :', erreur);
-        res.status(500).json({ erreur: 'Erreur serveur' });
-    })
+    })})
 },
-
-
-
-
-
 
 
 

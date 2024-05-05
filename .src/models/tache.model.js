@@ -48,7 +48,7 @@ module.exports = {
             const params = [id_tache];
     
             db.query(requete, params, (err, resultat) => {
-                if (erreur) {
+                if (err) {
                     console.log('Erreur sqlState : ' + err);
                     console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
                     reject(err);
