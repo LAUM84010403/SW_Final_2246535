@@ -87,11 +87,10 @@ inventerTache: (req, res) => {
 
 changerTache: (req,res) => {
     var message = "";
-    //Paramètre et non pas body
-    if (!req.params.id) {
+
+    if (!req.body.id) {
         message += "id, ";
     }
-
     if (!req.body.titre) {
         message += "titre, ";
     }
