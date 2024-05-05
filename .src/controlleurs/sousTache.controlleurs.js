@@ -26,8 +26,8 @@ module.exports = {
         };
 
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
-        .then((resultat) => {
-            modelSousTache.creerSousTacheBD(req)
+        .then((utilisateur_id) => {
+            modelSousTache.creerSousTacheBD(req, utilisateur_id)
             .then((tache) => {
                 res.send({ 
                     message: req.body.titre + " à été ajouter avec succès" });
