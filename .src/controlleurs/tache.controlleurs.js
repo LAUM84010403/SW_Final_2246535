@@ -1,7 +1,8 @@
 // CODAGE(controlleurs) DE L'API Tâches
 
 //appel des manipulation de la base de donnée
-const model = require('../models/tache.model');
+const modelUtilisateur = require('../models/utilisateur.model');
+const modelTache = require('../models/tache.model');
 
 module.exports = {
 
@@ -14,7 +15,7 @@ afficherTousTaches: (req, res) => {
     }
 
     if (queryParams.complete == "true") {
-        model.obtenirTousTacheDB(queryParams.id, true)
+        modelTache.obtenirTousTacheDB(queryParams.id, true)
         .then(result => {
             res.send(result);
         })
@@ -24,7 +25,7 @@ afficherTousTaches: (req, res) => {
         });
 
     } else {
-        model.obtenirTousTacheBD(queryParams.id, false)
+        modelTache.obtenirTousTacheBD(queryParams.id, false)
         .then(result => {
             res.send(result);
         })
@@ -61,10 +62,10 @@ inventerTache: (req, res) => {
             return;
         };
         console.log(req.headers.authorization)
-        model.trouverUsagerBD(req.headers.authorization)
+        modelUtilisateur.trouverUsagerBD(req.headers.authorization)
         
         .then((resultat) => {
-            model.creerTacheBD(req, resultat)
+            modelTache.creerTacheBD(req, resultat)
             .then((tache) => {
                 res.send({ message: req.body.titre + " à été créer en tant que tâche!" });
             })

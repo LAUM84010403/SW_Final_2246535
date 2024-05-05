@@ -9,7 +9,7 @@ module.exports = {
 
     creerSousTacheBD: (req, user_id) =>{
         return new Promise((resolve, reject) => {
-            const requete = `INSERT INTO sous_tache (tache_id, titre, complete) VALUES ($1, $2, $3)`;
+            const requete = `INSERT INTO sous_taches (tache_id, titre, complete) VALUES ($1, $2, $3)`;
             const params = [user_id, req.body.titre, req.body.complete];
 
             db.query(requete, params, (err, resultat) => {
