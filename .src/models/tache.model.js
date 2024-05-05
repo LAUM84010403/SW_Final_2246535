@@ -47,7 +47,7 @@ module.exports = {
             const requete = `SELECT id, titre, description, date_debut, date_echeance, complete FROM taches WHERE id = $1`;
             const params = [id_tache];
     
-            sql.query(requete, params, (err, resultat) => {
+            db.query(requete, params, (err, resultat) => {
                 if (erreur) {
                     console.log('Erreur sqlState : ' + err);
                     console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
@@ -63,11 +63,11 @@ module.exports = {
             let params = [req.body.titre, req.body.description, req.body.date_debut, req.body.date_echeance, req.body.complete, req.params.id]
             
     
-            sql.query(requete, params, (erreur, resultat) => {
-                if (erreur) {
+            db.query(requete, params, (err, resultat) => {
+                if (err) {
                     console.log('Erreur sqlState : ' + err);
                     console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
-                    reject(erreur);
+                    reject(err);
                 }
                 resolve(resultat.rows);
             });
