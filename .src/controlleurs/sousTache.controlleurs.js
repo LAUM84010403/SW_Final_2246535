@@ -49,7 +49,55 @@ module.exports = {
                 message: "Un erreur est survenue au moment de la recherche de l'utilisateur"
             });
         });
+    },
+
+    changerSousTache: (req, res) => {
+    var message = "";
+    if (!req.body.id) {
+        message += "id, ";
     }
+    if (!req.body.tache_id) {
+        message += "tache_id, ";
+    }
+    if (!req.body.titre) {
+        message += "titre, ";
+    }
+    if (req.body.complet == null) {
+        message += "complete, ";
+    }
+    if (message != "") {
+        res.status(400);
+        res.send({
+            champ_manquant: message
+        });
+        return;
+    }
+    modelSousTache.trouverTacheBD(req.body.id)
+    .then(resultat => {
+        Taches.modifierUneTacheBD(req)
+        .then((tache) => {
+            res.send({ message: "La Sous tâche " + [req.params.id] + " fût modifier avec succès!", 
+            tache: { 
+                id: req.params.id, 
+                titre: req.body.titre, 
+                complet: req.body.complete } 
+            })
+            .catch((erreur) => {
+                console.log('Erreur : ', erreur);
+                res.status(500)
+                res.send({
+                    message: "Aucune sous tâche n'existe avec ce ID, est-ce le bon? ID:" + [req.params.id]
+                });
+            });
+    })
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500)
+        res.send({
+            message: "la sous tâche n'existe pas, est-ce le bon ID : " + [req.params.id]
+        });
+    })})
+},
 
 
 
