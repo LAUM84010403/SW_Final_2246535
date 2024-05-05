@@ -47,7 +47,7 @@ module.exports = {
                     console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
                     reject(err);
                 }
-                resolve(resultat.rows[1]);
+                resolve(resultat[0].id);
             });
         });
     },

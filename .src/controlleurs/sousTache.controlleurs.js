@@ -32,7 +32,7 @@ module.exports = {
                 res.send({ 
                     message: req.body.titre + " à été ajouter avec succès" });
             })
-            
+
             .catch((erreur) => {
                 console.log('Erreur : ', erreur);
                 res.status(500)
