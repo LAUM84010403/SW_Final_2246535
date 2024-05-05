@@ -61,11 +61,10 @@ inventerTache: (req, res) => {
             });
             return;
         };
-        console.log(req.headers.authorization)
+
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
         
         .then((resultat) => {
-            console.log(resultat)
             modelTache.creerTacheBD(req, resultat)
             .then((tache) => {
                 res.send({ message: req.body.titre + " à été créer en tant que tâche!" });

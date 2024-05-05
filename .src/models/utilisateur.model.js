@@ -38,6 +38,7 @@ module.exports = {
 
     trouverUsagerBD: (api_cle) => {
         return new Promise((resolve, reject) => {
+            console.log(api_cle)
             const requete = `SELECT id FROM utilisateur WHERE cle_api = $1`;
             const params = [api_cle];
     
@@ -47,8 +48,7 @@ module.exports = {
                     console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
                     reject(err);
                 }
-                const idUtilisateur = resultat[0].id;
-                resolve(idUtilisateur);
+                resolve(resultat);
             });
         });
     },
