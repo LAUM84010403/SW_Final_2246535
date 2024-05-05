@@ -7,6 +7,7 @@ const app = express();
 
 //controlleurs
 const controllerTache = require('../controlleurs/tache.controlleurs.js');
+const controllerSousTache = require('../controlleurs/sousTache.controlleurs.js');
 const controllerUtilisateur = require('../controlleurs/utilisateur.controlleurs.js');
 
 
@@ -32,7 +33,7 @@ router.post('/ajouter', controllerTache.inventerTache)
 ///router.post('/supprimer', controllerTache)
 
 //CRÉER UNE TACHE
-router.post('/sous/ajouter'.inventerSousTache)
+router.post('/sous/ajouter', controllerSousTache.inventerSousTache)
 //MODIFIER TÂCHE
 ///router.post('/sous/modifier')
 //MODIFIER TÂCHE STATUT
