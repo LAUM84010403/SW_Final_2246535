@@ -33,4 +33,22 @@ module.exports = {
         })
         .catch(err => reject(err))
     },
+
+    
+
+    trouverUsagerBD: (api_cle) => {
+        return new Promise((resolve, reject) => {
+            const requete = `SELECT id FROM utilisateur WHERE cle_api = $1`;
+            const params = [api_cle];
+    
+            db.query(requete, params, (err, resultat) => {
+                if (err) {
+                    console.log('Erreur sqlState : ' + err);
+                    console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
+                    reject(err);
+                }
+                resolve(resultat.rows[1]);
+            });
+        });
+    },
 };

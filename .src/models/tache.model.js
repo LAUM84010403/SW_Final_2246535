@@ -7,10 +7,10 @@ const db = require("../config/db_pg.js");
 //équivalent du main
 module.exports = {
 
-    obtenirTousTacheBD: (userID, isComplete) => {
+    obtenirTousTacheBD: (userID, estComplet) => {
         return new Promise((resolve, reject) => { 
                 
-            const query = isComplete ? 'SELECT * FROM taches WHERE utilisateur_id = $1 ORDER BY id;'
+            const query = estComplet ? 'SELECT * FROM taches WHERE utilisateur_id = $1 ORDER BY id;'
                                      : 'SELECT * FROM taches WHERE utilisateur_id = $1 AND complete = false ORDER BY id;';
             const values = [userID];
 
@@ -24,23 +24,6 @@ module.exports = {
             resolve(result.rows);
         });
         })
-    },
-
-
-    trouverUsagerBD: (api_cle) => {
-        return new Promise((resolve, reject) => {
-            const requete = `SELECT id FROM utilisateur WHERE cle_api = $1`;
-            const params = [api_cle];
-    
-            db.query(requete, params, (err, resultat) => {
-                if (err) {
-                    console.log('Erreur sqlState : ' + err);
-                    console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
-                    reject(err);
-                }
-                resolve(resultat.rows[1]);
-            });
-        });
     },
 
     creerTacheBD: (req, user_id) =>{

@@ -19,7 +19,7 @@ afficherTousTaches: (req, res) => {
             res.send(result);
         })
         .catch(error => {
-            console.error('Erreur lors de la récupération des tâches :', error);
+            console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
             res.status(500).json({ error: 'Erreur serveur' });
         });
 
@@ -29,7 +29,7 @@ afficherTousTaches: (req, res) => {
             res.send(result);
         })
         .catch(error => {
-            console.error('Erreur lors de la récupération des tâches :', error);
+            console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
             res.status(500).json({ error: 'Erreur serveur' });
         });
     }},
@@ -66,13 +66,13 @@ inventerTache: (req, res) => {
         .then((resultat) => {
             model.creerTacheBD(req, resultat)
             .then((tache) => {
-                res.send({ message: "la tache " + req.body.titre + " à été ajouter avec succès" });
+                res.send({ message: req.body.titre + " à été créer en tant que tâche!" });
             })
             .catch((erreur) => {
                 console.log('Erreur : ', erreur);
                 res.status(500)
                 res.send({
-                    message: "Erreur lors de la creation de la tache"
+                    message: "Un erreur est survenue au moment de la création de la tâche"
                 });
             });
         })
@@ -80,7 +80,7 @@ inventerTache: (req, res) => {
             console.log('Erreur : ', erreur);
             res.status(500)
             res.send({
-                message: "Erreur lors de la recherche de l'utilisateur"
+                message: "Un erreur est survenue au moment de la recherche de l'utilisateur"
             });
         });
     }
