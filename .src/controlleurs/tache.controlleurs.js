@@ -115,7 +115,7 @@ modifierTache: (req,res) => {
     }
     modelTache.trouverTacheBD(req.body.id)
     .then(resultat => {
-        taches.modifierUneTacheBD(req)
+        modelTache.modifierUneTacheBD(req)
         .then((tache) => {
             res.send({ message: "La tâche " + [req.params.id] + " fût modifier avec succès!", 
             tache: { 
