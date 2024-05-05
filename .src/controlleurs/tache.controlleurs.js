@@ -13,8 +13,8 @@ afficherTousTaches: (req, res) => {
         return;
     }
 
-    if (queryParams.complete == "true") {
-        modelTache.obtenirTousTacheDB(queryParams.id, true)
+    if (req.query.complete == "true") {
+        modelTache.obtenirTousTacheDB(req.query.id, true)
         .then(result => {
             res.send(result);
         })
@@ -24,7 +24,7 @@ afficherTousTaches: (req, res) => {
         });
 
     } else {
-        modelTache.obtenirTousTacheBD(queryParams.id, false)
+        modelTache.obtenirTousTacheBD(req.query.id, false)
         .then(result => {
             res.send(result);
         })
@@ -88,7 +88,7 @@ inventerTache: (req, res) => {
 changerTache: (req,res) => {
     var message = "";
     //Paramètre et non pas body
-    if (!req.query.id) {
+    if (!req.params.id) {
         message += "id, ";
     }
 
