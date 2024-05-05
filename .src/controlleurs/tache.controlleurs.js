@@ -66,7 +66,6 @@ inventerTache: (req, res) => {
         
         .then((resultat) => {
             console.log(resultat)
-            console.log(resultat[0])
             modelTache.creerTacheBD(req, resultat)
             .then((tache) => {
                 res.send({ message: req.body.titre + " à été créer en tant que tâche!" });
