@@ -84,7 +84,77 @@ inventerTache: (req, res) => {
                 message: "Un erreur est survenue au moment de la recherche de l'utilisateur"
             });
         });
+    },
+
+changerTache: (req,res) => {
+    var message = "";
+    if (!req.body.titre) {
+        message += "titre, ";
     }
+    if (!req.body.description) {
+        message += "description, ";
+    }
+    if (!req.body.date_debut) {
+        message += "date_debut, ";
+    }
+    if (!req.body.date_echeance) {
+        message += "date_echeance, ";
+    }
+    if (req.body.complete == null) {
+        message += "complete, ";
+    }
+    if (!req.params.id) {
+        message += "id, ";
+    }
+    if (message != "") {
+        res.status(400);
+        res.send({
+            champ_manquant: message
+        });
+        return;
+    }
+    modelTache.trouverTacheBD(req.body.id)
+    .then(resultat)
+        Taches.modifierUneTacheBD(req)
+        .then((tache) => {
+            res.send({ message: "La tâche " + [req.params.id] + " fût modifier avec succès!", 
+            tache: { 
+                id: req.params.id, 
+                titre: req.body.titre, 
+                description: req.body.desciption, 
+                date_debut: req.body.date_debut, 
+                date_echeance: req.body.date_echeance, 
+                complete: req.body.complete } 
+            })
+            .catch((erreur) => {
+                console.log('Erreur : ', erreur);
+                res.status(500)
+                res.send({
+                    message: "Aucune tache n'existe avec ce ID, est-ce le bon? ID:" + [req.params.id]
+                });
+            });
+    })
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500)
+        res.send({
+            message: "la tâche n'existe pas, est-ce le bon ID:" + [req.params.id]
+        });
+    })
+
+
+
+
+
+
+    .catch((erreur) =>{
+        console.error('Un erreur est survenue au moment de la récupération des tâches :', erreur);
+        res.status(500).json({ erreur: 'Erreur serveur' });
+    })
+},
+
+
+
 
 
 

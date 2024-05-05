@@ -40,4 +40,43 @@ module.exports = {
             });
         });
     },
+
+    trouverTacheBD: (id_tache) => {
+        return new Promise((resolve, reject) => {
+
+            const requete = `SELECT id, titre, description, date_debut, date_echeance, complete FROM taches WHERE id = $1`;
+            const params = [id_tache];
+    
+            sql.query(requete, params, (err, resultat) => {
+                if (erreur) {
+                    console.log('Erreur sqlState : ' + err);
+                    console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
+                    reject(err);
+                }
+                resolve(resultat.rows);
+            });
+        });
+    },
+    modifierUneTacheBD: (req) =>{
+        return new Promise((resolve, reject) => {
+            let requete = `UPDATE taches SET titre = $1, description = $2, date_debut = $3, date_echeance = $4, complete = $5 where id = $6`;
+            let params = [req.body.titre, req.body.description, req.body.date_debut, req.body.date_echeance, req.body.complete, req.params.id]
+            
+    
+            sql.query(requete, params, (erreur, resultat) => {
+                if (erreur) {
+                    console.log('Erreur sqlState : ' + err);
+                    console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
+                    reject(erreur);
+                }
+                resolve(resultat.rows);
+            });
+        });
+
+
+    },
+
+
+
+
 };
