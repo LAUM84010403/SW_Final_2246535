@@ -7,8 +7,7 @@ const modelTache = require('../models/tache.model');
 module.exports = {
 
 afficherTousTaches: (req, res) => {
-    const queryParams = req.query;
-    if (!queryParams.id) {
+    if (!req.query.id) {
         res.status(400);
         res.send("Il manque le ID utilisateur; '/api/tache/tous?id=[id de l'utilisateur]'");
         return;
@@ -89,7 +88,7 @@ inventerTache: (req, res) => {
 changerTache: (req,res) => {
     var message = "";
     //Paramètre et non pas body
-    if (!req.params.id) {
+    if (!req.query.id) {
         message += "id, ";
     }
 
