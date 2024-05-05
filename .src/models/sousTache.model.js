@@ -7,10 +7,10 @@ const db = require("../config/db_pg.js");
 //équivalent du main
 module.exports = {
 
-    creerSousTacheBD: (req, user_id) =>{
+    creerSousTacheBD: (req) =>{
         return new Promise((resolve, reject) => {
             const requete = `INSERT INTO sous_taches (tache_id, titre, complete) VALUES ($1, $2, $3)`;
-            const params = [user_id, req.body.titre, req.body.complete];
+            const params = [req.body.id, req.body.titre, req.body.complete];
 
             db.query(requete, params, (err, resultat) => {
                 if (err) {
