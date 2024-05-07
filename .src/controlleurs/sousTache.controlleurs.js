@@ -72,7 +72,7 @@ module.exports = {
         });
         return;
     }
-    modelSousTache.trouverTacheBD(req.body.id)
+    modelSousTache.trouverSousTacheBD(req.body.id)
     .then(resultat => {
         Taches.modifierUneTacheBD(req)
         .then((tache) => {
