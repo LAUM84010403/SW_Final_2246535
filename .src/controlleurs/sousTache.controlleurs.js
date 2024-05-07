@@ -74,7 +74,7 @@ module.exports = {
     }
     modelSousTache.trouverSousTacheBD(req.body.id)
     .then(resultat => {
-        Taches.modifierUneTacheBD(req)
+        modelSousTache.modifierUneSousTacheBD(req)
         .then((tache) => {
             res.send({ message: "La Sous tâche " + [req.params.id] + " fût modifier avec succès!", 
             tache: { 
