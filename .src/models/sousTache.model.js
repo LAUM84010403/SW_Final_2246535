@@ -41,7 +41,7 @@ module.exports = {
     },
     modifierUneSousTacheBD: (req) =>{
         return new Promise((resolve, reject) => {
-            let requete = `UPDATE taches SET tache_id = $1, titre = $2, complete = $3 where id = $4`;
+            let requete = `UPDATE sous_taches SET tache_id = $1, titre = $2, complete = $3 where id = $4`;
             let params = [req.body.tache_id, req.body.titre, req.body.complete, req.params.id]
             
     
