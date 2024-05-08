@@ -14,7 +14,7 @@ afficherTousTaches: (req, res) => {
     }
 
     if (req.query.complete == "true") {
-        modelTache.obtenirTousTacheDB(req.query.id, true)
+        modelTache.obtenirTousTacheBD(req.query.id, true)
         .then(result => {
             res.send(result);
         })
