@@ -5,7 +5,7 @@ const modelUtilisateur = require('../models/utilisateur.model');
 const modelSousTache = require('../models/sousTache.model');
 
 module.exports = {
-inventerSousTache: (req, res) => {
+creerSousTache: (req, res) => {
     let msgErreur = "";
     if (!req.body.id) {
         msgErreur += "id_tache, ";
@@ -13,7 +13,7 @@ inventerSousTache: (req, res) => {
     if (!req.body.titre) {
         msgErreur += "titre, ";
     }
-    if (!req.body.complet == true || !req.body.complet == false) {
+    if (typeof req.body.complet !== 'boolean') {
         msgErreur += "complet doit être true / false";
     }
 

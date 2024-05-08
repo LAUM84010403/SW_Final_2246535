@@ -33,12 +33,12 @@ router.post('/modifier', controllerTache.modifierTache)
 ///router.post('/supprimer', controllerTache)
 
 //CRÉER UNE SOUS-TACHE
-router.post('/sous/ajouter', controllerSousTache.inventerSousTache)
+router.post('/sous/ajouter', controllerSousTache.creerSousTache)
 //MODIFIER SOUS-TÂCHE
 router.post('/sous/modifier', controllerSousTache.changerSousTache)
 //MODIFIER SOUS-TÂCHE STATUT
 ///router.post('/sous/modifierStatut')
-//SUPPRIMER STÂCHE
+//SUPPRIMER SOUS-TÂCHE
 ///router.post('/sous/supprimer')
 
 //AFFICHER TOUTES LES TÂCHES
