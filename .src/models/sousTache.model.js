@@ -54,7 +54,21 @@ module.exports = {
             });
         });
     },
-
+    supprimerSousTacheBD: (id) => {
+        return new Promise((resolve, reject) => {
+            const requete = `DELETE FROM sous_taches where id = $1`;
+            const params = [id]
+            
+            db.query(requete, params, (err, resultat) => {
+                if (err) {
+                    console.log('Erreur sqlState : ' + err);
+                    console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
+                    reject(err);
+                }
+                resolve();
+            });
+        })
+    },
 
 
 

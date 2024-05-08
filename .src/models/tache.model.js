@@ -74,7 +74,7 @@ module.exports = {
             });
         });
     },
-    supprimerTache: (id) => {
+    supprimerTacheBD: (id) => {
         return new Promise((resolve, reject) => {
             const requete = `DELETE FROM taches where id = $1`;
             const params = [id]

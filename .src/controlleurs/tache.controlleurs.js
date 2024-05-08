@@ -3,6 +3,7 @@
 //appel des manipulation de la base de donnée
 const modelUtilisateur = require('../models/utilisateur.model');
 const modelTache = require('../models/tache.model');
+const modelSousTache = require('../models/sousTache.model');
 
 module.exports = {
 
@@ -183,19 +184,29 @@ supprimerTache: (req, res) => {
     .then((resultat) => {
         modelTache.trouverTacheBD(req.body.id)
         .then(resultat => {
-            modelTache.supprimerTache(req.query.id)
+            modelSousTache.supprimerSousTacheBD(req.query.id)
             .then(resultat => {
-                res.send({
-                    message: "La tâche " + [req.query.id] + " fût supprimée avec succès!",
-                });
+                modelTache.supprimerTacheBD(req.query.id)
+                .then(resultat => {
+                    res.send({
+                        message: "La tâche " + [req.query.id] + " fût supprimée avec succès!",
+                    });
+                })
+                .catch((erreur) => {
+                    console.log('Erreur : ', erreur);
+                    res.status(500);
+                    res.send({
+                        message: "Une erreur est survenue"
+                    });
+                })
             })
             .catch((erreur) => {
                 console.log('Erreur : ', erreur);
                 res.status(500);
                 res.send({
-                    message: "Une erreur est survenue"
+                    message: "Erreur de la suppresion des sous tâches."
                 });
-            })
+            });
         })
         .catch((erreur) => {
             console.log('Erreur : ', erreur);
@@ -203,7 +214,7 @@ supprimerTache: (req, res) => {
             res.send({
                 message: "La tâche n'existe pas, est-ce le bon ID:" + [req.query.id]
             });
-            });
+        });
     })
     .catch((erreur) => {
         console.log('Erreur : ', erreur);
