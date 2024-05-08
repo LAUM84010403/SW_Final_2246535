@@ -147,7 +147,7 @@ modifierTache: (req,res) => {
                         tache: {
                             id: req.params.id,
                             titre: req.body.titre,
-                            description: req.body.description, // "desciption" corrigé en "description"
+                            description: req.body.description,
                             date_debut: req.body.date_debut,
                             date_echeance: req.body.date_echeance,
                             complet: req.body.complete
