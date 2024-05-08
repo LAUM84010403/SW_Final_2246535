@@ -49,7 +49,7 @@ creerTache: (req, res) => {
         if (!req.body.date_echeance) {
             msgErreur += "date_echeance, ";
         }
-        if (!req.body.complet == true || !req.body.complet == false) {
+        if (typeof req.body.complet !== 'boolean') {
             msgErreur += "complet doit être true / false";
         }
     
