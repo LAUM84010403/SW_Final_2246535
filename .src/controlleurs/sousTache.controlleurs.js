@@ -24,7 +24,8 @@ module.exports = {
             });
             return;
         };
-
+        modelUtilisateur.validationCle(req.headers.authorization)
+        .then((resultat) => {
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
         .then((utilisateur_id) => {
             modelSousTache.creerSousTacheBD(req, utilisateur_id)
@@ -49,7 +50,17 @@ module.exports = {
                 message: "Un erreur est survenue au moment de la recherche de l'utilisateur"
             });
         });
+    })
+    
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500);
+        res.send({
+            message: "Votre clé Api n'est pas bonne!"
+        });
+    })
     },
+
 
     changerSousTache: (req, res) => {
     var message = "";
@@ -72,6 +83,8 @@ module.exports = {
         });
         return;
     }
+    modelUtilisateur.validationCle(req.headers.authorization)
+    .then((resultat) => {
     modelSousTache.trouverSousTacheBD(req.body.id)
     .then(resultat => {
         modelSousTache.modifierUneSousTacheBD(req)
@@ -97,6 +110,15 @@ module.exports = {
             message: "la sous tâche n'existe pas, est-ce le bon ID : " + [req.params.id]
         });
     })})
+})
+    
+.catch((erreur) => {
+    console.log('Erreur : ', erreur);
+    res.status(500);
+    res.send({
+        message: "Votre clé Api n'est pas bonne!"
+    });
+})
 },
 
 

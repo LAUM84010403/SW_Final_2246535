@@ -13,6 +13,9 @@ afficherTousTaches: (req, res) => {
         return;
     }
 
+    modelUtilisateur.validationCle(req.headers.authorization)
+    .then((resultat) => {
+
     if (req.query.complete == "true") {
         modelTache.obtenirTousTacheBD(req.query.id, true)
         .then(result => {
@@ -32,7 +35,17 @@ afficherTousTaches: (req, res) => {
             console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
             res.status(500).json({ error: 'Erreur serveur' });
         });
-    }},
+    }
+})
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500);
+        res.send({
+            message: "Votre clé Api n'est pas bonne!"
+        });
+    })
+
+},
 
 
 creerTache: (req, res) => {
@@ -60,7 +73,8 @@ creerTache: (req, res) => {
             });
             return;
         };
-
+modelUtilisateur.validationCle(req.headers.authorization)
+    .then((resultat) => {
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
         
         .then((resultat) => {
@@ -83,6 +97,16 @@ creerTache: (req, res) => {
                 message: "Un erreur est survenue au moment de la recherche de l'utilisateur"
             });
         });
+    })
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500);
+        res.send({
+            message: "Votre clé Api n'est pas bonne!"
+        });
+    })
+
+        
     },
 
 modifierTache: (req,res) => {
@@ -113,6 +137,8 @@ modifierTache: (req,res) => {
         });
         return;
     }
+    modelUtilisateur.validationCle(req.headers.authorization)
+    .then((resultat) => {
     modelTache.trouverTacheBD(req.body.id)
     .then(resultat => {
         modelTache.modifierUneTacheBD(req)
@@ -144,6 +170,34 @@ modifierTache: (req,res) => {
             message: "La tâche n'existe pas, est-ce le bon ID:" + [req.params.id]
         });
     });
+
+    })
+    
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500);
+        res.send({
+            message: "Votre clé Api n'est pas bonne!"
+        });
+    })
+},
+
+supprimerTache: (req, res) => {
+    modelUtilisateur.validationCle(req.headers.authorization)
+    .then((resultat) => {
+
+
+    })
+    
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500);
+        res.send({
+            message: "Votre clé Api n'est pas bonne!"
+        });
+    })
+
+
 },
 
 
