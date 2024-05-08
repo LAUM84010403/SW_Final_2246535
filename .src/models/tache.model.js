@@ -44,7 +44,7 @@ module.exports = {
 
     trouverTacheBD: (id_tache) => {
         return new Promise((resolve, reject) => {
-            
+
             const requete = `SELECT id, titre, description, date_debut, date_echeance, complete FROM taches WHERE id = $1`;
             const params = [id_tache];
             
@@ -60,8 +60,8 @@ module.exports = {
     },
     modifierUneTacheBD: (req) =>{
         return new Promise((resolve, reject) => {
-            let requete = `UPDATE taches SET titre = $1, description = $2, date_debut = $3, date_echeance = $4, complete = $5 where id = $6`;
-            let params = [req.body.titre, req.body.description, req.body.date_debut, req.body.date_echeance, req.body.complete, req.params.id]
+            const requete = `UPDATE taches SET titre = $1, description = $2, date_debut = $3, date_echeance = $4, complete = $5 where id = $6`;
+            const params = [req.body.titre, req.body.description, req.body.date_debut, req.body.date_echeance, req.body.complete, req.params.id]
             
     
             db.query(requete, params, (err, resultat) => {
@@ -73,9 +73,25 @@ module.exports = {
                 resolve(resultat.rows);
             });
         });
-
-
     },
+    supprimerTache: (id) => {
+        return new Promise((resolve, reject) => {
+            const requete = `DELETE FROM taches where id = $1`;
+            const params = [id]
+            
+            db.query(requete, params, (err, resultat) => {
+                if (err) {
+                    console.log('Erreur sqlState : ' + err);
+                    console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
+                    reject(err);
+                }
+                resolve();
+            });
+        });
+
+
+
+    }
 
 
 
