@@ -28,7 +28,7 @@ router.post('/ajouter', controllerTache.creerTache)
 //MODIFIER TÂCHE
 router.post('/modifier', controllerTache.modifierTache)
 //MODIFIER TÂCHE STATUT
-///router.post('/modifierStatut', controllerTache)
+router.post('/modifierStatut', controllerTache.modifierStatusTache)
 //SUPPRIMER TÂCHE
 router.post('/supprimer', controllerTache.supprimerTache)
 
@@ -37,9 +37,9 @@ router.post('/sous/ajouter', controllerSousTache.creerSousTache)
 //MODIFIER SOUS-TÂCHE
 router.post('/sous/modifier', controllerSousTache.changerSousTache)
 //MODIFIER SOUS-TÂCHE STATUT
-///router.post('/sous/modifierStatut')
+router.post('/sous/modifierStatut', controllerSousTache.modifierStatusSousTache)
 //SUPPRIMER SOUS-TÂCHE
-///router.post('/sous/supprimer')
+router.post('/sous/supprimer', controllerSousTache.supprimerSousTache)
 
 //AFFICHER TOUTES LES TÂCHES
 router.get('/tous', controllerTache.afficherTousTaches);

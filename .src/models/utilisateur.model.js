@@ -38,7 +38,7 @@ module.exports = {
 
     trouverUsagerBD: (api_cle) => {
         return new Promise((resolve, reject) => {
-            
+
             const requete = `SELECT id FROM utilisateur WHERE cle_api = $1`;
             const params = [api_cle];
             
@@ -55,10 +55,10 @@ module.exports = {
 
     validationCle: (cleApi) => {
         return new Promise((resolve, reject) => {
-
+            
             const requete = 'SELECT COUNT(*) AS usager FROM utilisateur u WHERE cle_api = $1; ';
             const params = [cleApi];
-    
+            
             db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);

@@ -227,5 +227,58 @@ supprimerTache: (req, res) => {
 
 },
 
+modifierStatusTache: (req, res) => {
+    let msgErreur = "";
+    if (!req.query.id) {
+        message += "id, ";
+    }
+    if (typeof req.body.complet !== 'boolean') {
+        msgErreur += "complet doit être true / false";
+    }
+
+    if (msgErreur != "") {
+        res.status(400);
+        res.send({
+            champ_manquant: msgErreur
+        });
+        return;
+    };
+
+    modelUtilisateur.validationCle(req.headers.authorization)
+    .then((resultat) => {
+        modelTache.trouverTacheBD(req.query.id)
+        .then(resultat => {
+            modelTache.modifierStatusTacheDB(req.body.complet, req.query.id)
+            .then(resultat => {
+                res.send({
+                    message: "Le statue de la tâche " + [req.query.id] + " fût supprimée avec succès!",
+                });
+            })
+            .catch((erreur) => {
+                console.log('Erreur : ', erreur);
+                res.status(500);
+                res.send({
+                    message: "Erreur de la modification du statu de la tâches."
+                });
+            });
+        })
+        .catch((erreur) => {
+            console.log('Erreur : ', erreur);
+            res.status(500);
+            res.send({
+                message: "La tâche n'existe pas, est-ce le bon ID:" + [req.query.id]
+            });
+        });
+    })
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500);
+        res.send({
+            message: "Votre clé Api n'est pas bonne!"
+        });
+    })
+},
+    
+
 
 }

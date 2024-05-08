@@ -70,7 +70,22 @@ module.exports = {
         })
     },
 
-
+    modifierStatusSousTacheDB: (complet, id) => {
+        return new Promise((resolve, reject) => {
+            
+            let requete = `UPDATE sous_taches SET complete = $1 where id = $2`;
+            let params = [complet, id]
+            
+            db.query(requete, params, (err, resultat) => {
+                if (err) {
+                    console.log('Erreur sqlState : ' + err);
+                    console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
+                    reject(err)
+                }
+                resolve();
+            });
+        });
+    },
 
 
 };
