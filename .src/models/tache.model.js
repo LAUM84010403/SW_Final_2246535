@@ -10,8 +10,8 @@ module.exports = {
     obtenirTousTacheBD: (userID, estComplet) => {
         return new Promise((resolve, reject) => { 
                 
-            const query = estComplet ? 'SELECT taches.*, sous_taches.* FROM public.taches LEFT JOIN public.sous_taches ON public.taches.id = public.sous_taches.tache_id WHERE utilisateur_id = $1 ORDER BY id;'
-                                     : 'SELECT taches.*, sous_taches.* FROM public.taches LEFT JOIN public.sous_taches ON public.taches.id = public.sous_taches.tache_id WHERE utilisateur_id = $1 AND taches.complete = false ORDER BY id;';
+            const query = estComplet ? 'SELECT taches.*, sous_taches.* FROM public.taches LEFT JOIN public.sous_taches ON public.taches.id = public.sous_taches.tache_id WHERE utilisateur_id = $1 ORDER BY taches.id;'
+                                     : 'SELECT taches.*, sous_taches.* FROM public.taches LEFT JOIN public.sous_taches ON public.taches.id = public.sous_taches.tache_id WHERE utilisateur_id = $1 AND taches.complete = false ORDER BY taches.id;';
             const values = [userID];
 
         db.query(query, values, (err, result) => {
