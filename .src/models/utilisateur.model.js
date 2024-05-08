@@ -38,10 +38,10 @@ module.exports = {
 
     trouverUsagerBD: (api_cle) => {
         return new Promise((resolve, reject) => {
-            console.log(api_cle)
+            
             const requete = `SELECT id FROM utilisateur WHERE cle_api = $1`;
             const params = [api_cle];
-    
+            
             db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log('Erreur sqlState : ' + err);

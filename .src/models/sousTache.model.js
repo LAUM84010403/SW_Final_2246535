@@ -28,7 +28,7 @@ module.exports = {
 
             const requete = `SELECT * FROM sous_taches WHERE id = $1`;
             const params = [id_sous_tache];
-    
+
             db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log('Erreur sqlState : ' + err);
@@ -44,7 +44,6 @@ module.exports = {
             let requete = `UPDATE sous_taches SET tache_id = $1, titre = $2, complete = $3 where id = $4`;
             let params = [req.body.tache_id, req.body.titre, req.body.complete, req.params.id]
             
-    
             db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log('Erreur sqlState : ' + err);
@@ -54,7 +53,6 @@ module.exports = {
                 resolve(resultat.rows);
             });
         });
-
     },
 
 

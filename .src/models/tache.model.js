@@ -11,7 +11,7 @@ module.exports = {
         return new Promise((resolve, reject) => { 
                 
             const query = estComplet ? 'SELECT taches.*, sous_taches.* FROM public.taches LEFT JOIN public.sous_taches ON public.taches.id = public.sous_taches.tache_id WHERE utilisateur_id = $1 ORDER BY taches.id;'
-                                     : 'SELECT taches.*, sous_taches.* FROM public.taches LEFT JOIN public.sous_taches ON public.taches.id = public.sous_taches.tache_id WHERE utilisateur_id = $1 AND taches.complete = false ORDER BY taches.id;';
+                                        : 'SELECT taches.*, sous_taches.* FROM public.taches LEFT JOIN public.sous_taches ON public.taches.id = public.sous_taches.tache_id WHERE utilisateur_id = $1 AND taches.complete = false ORDER BY taches.id;';
             const values = [userID];
 
         db.query(query, values, (err, result) => {
@@ -20,7 +20,6 @@ module.exports = {
                 console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
                 reject(err);
             }
-
             resolve(result.rows);
         });
         })
@@ -28,8 +27,10 @@ module.exports = {
 
     creerTacheBD: (req, user_id) =>{
         return new Promise((resolve, reject) => {
+
             const requete = `INSERT INTO taches (utilisateur_id, titre, description, date_debut, date_echeance, complete) VALUES ($1, $2, $3, $4, $5, $6)`;
             const params = [user_id, req.body.titre, req.body.description, req.body.date_debut, req.body.date_echeance, req.body.complete];
+
             db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log('Erreur sqlState : ' + err);
@@ -43,10 +44,10 @@ module.exports = {
 
     trouverTacheBD: (id_tache) => {
         return new Promise((resolve, reject) => {
-
+            
             const requete = `SELECT id, titre, description, date_debut, date_echeance, complete FROM taches WHERE id = $1`;
             const params = [id_tache];
-    
+            
             db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log('Erreur sqlState : ' + err);

@@ -15,28 +15,27 @@ afficherTousTaches: (req, res) => {
 
     modelUtilisateur.validationCle(req.headers.authorization)
     .then((resultat) => {
+        if (req.query.complete == "true") {
+            modelTache.obtenirTousTacheBD(req.query.id, true)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(error => {
+                console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
+                res.status(500).json({ error: 'Erreur serveur' });
+            });
 
-    if (req.query.complete == "true") {
-        modelTache.obtenirTousTacheBD(req.query.id, true)
-        .then(result => {
-            res.send(result);
-        })
-        .catch(error => {
-            console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
-            res.status(500).json({ error: 'Erreur serveur' });
-        });
-
-    } else {
-        modelTache.obtenirTousTacheBD(req.query.id, false)
-        .then(result => {
-            res.send(result);
-        })
-        .catch(error => {
-            console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
-            res.status(500).json({ error: 'Erreur serveur' });
-        });
-    }
-})
+        } else {
+            modelTache.obtenirTousTacheBD(req.query.id, false)
+            .then(result => {
+                res.send(result);
+            })
+            .catch(error => {
+                console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
+                res.status(500).json({ error: 'Erreur serveur' });
+            });
+        }
+    })
     .catch((erreur) => {
         console.log('Erreur : ', erreur);
         res.status(500);
@@ -73,10 +72,9 @@ creerTache: (req, res) => {
             });
             return;
         };
-modelUtilisateur.validationCle(req.headers.authorization)
+    modelUtilisateur.validationCle(req.headers.authorization)
     .then((resultat) => {
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
-        
         .then((resultat) => {
             modelTache.creerTacheBD(req, resultat[0].id)
             .then((tache) => {
@@ -139,40 +137,38 @@ modifierTache: (req,res) => {
     }
     modelUtilisateur.validationCle(req.headers.authorization)
     .then((resultat) => {
-    modelTache.trouverTacheBD(req.body.id)
-    .then(resultat => {
-        modelTache.modifierUneTacheBD(req)
-            .then((tache) => {
-                res.send({
-                    message: "La tâche " + [req.params.id] + " fût modifiée avec succès!",
-                    tache: {
-                        id: req.params.id,
-                        titre: req.body.titre,
-                        description: req.body.description, // "desciption" corrigé en "description"
-                        date_debut: req.body.date_debut,
-                        date_echeance: req.body.date_echeance,
-                        complet: req.body.complete
-                    }
+        modelTache.trouverTacheBD(req.body.id)
+        .then(resultat => {
+            modelTache.modifierUneTacheBD(req)
+                .then((tache) => {
+                    res.send({
+                        message: "La tâche " + [req.params.id] + " fût modifiée avec succès!",
+                        tache: {
+                            id: req.params.id,
+                            titre: req.body.titre,
+                            description: req.body.description, // "desciption" corrigé en "description"
+                            date_debut: req.body.date_debut,
+                            date_echeance: req.body.date_echeance,
+                            complet: req.body.complete
+                        }
+                    });
+                })
+                .catch((erreur) => {
+                    console.log('Erreur : ', erreur);
+                    res.status(500);
+                    res.send({
+                        message: "Aucune tache n'existe avec cet ID, est-ce le bon? ID:" + [req.params.id]
+                    });
                 });
-            })
-            .catch((erreur) => {
-                console.log('Erreur : ', erreur);
-                res.status(500);
-                res.send({
-                    message: "Aucune tache n'existe avec cet ID, est-ce le bon? ID:" + [req.params.id]
-                });
+        })
+        .catch((erreur) => {
+            console.log('Erreur : ', erreur);
+            res.status(500);
+            res.send({
+                message: "La tâche n'existe pas, est-ce le bon ID:" + [req.params.id]
+            });
             });
     })
-    .catch((erreur) => {
-        console.log('Erreur : ', erreur);
-        res.status(500);
-        res.send({
-            message: "La tâche n'existe pas, est-ce le bon ID:" + [req.params.id]
-        });
-    });
-
-    })
-    
     .catch((erreur) => {
         console.log('Erreur : ', erreur);
         res.status(500);
@@ -188,7 +184,6 @@ supprimerTache: (req, res) => {
 
 
     })
-    
     .catch((erreur) => {
         console.log('Erreur : ', erreur);
         res.status(500);
