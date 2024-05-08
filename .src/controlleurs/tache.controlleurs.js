@@ -49,8 +49,8 @@ creerTache: (req, res) => {
         if (!req.body.date_echeance) {
             msgErreur += "date_echeance, ";
         }
-        if (req.body.complet == null) {
-            msgErreur += "complet";
+        if (!req.body.complet == true || !req.body.complet == false) {
+            msgErreur += "complet doit être true / false";
         }
     
         if (msgErreur != "") {

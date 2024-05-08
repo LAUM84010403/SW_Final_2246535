@@ -13,8 +13,8 @@ module.exports = {
         if (!req.body.titre) {
             msgErreur += "titre, ";
         }
-        if (req.body.complet == null) {
-            msgErreur += "complet";
+        if (!req.body.complet == true || !req.body.complet == false) {
+            msgErreur += "complet doit être true / false";
         }
     
         if (msgErreur != "") {
