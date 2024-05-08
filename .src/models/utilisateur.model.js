@@ -59,7 +59,7 @@ module.exports = {
             const requete = 'SELECT COUNT(*) AS usager FROM utilisateur u WHERE cle_api = $1; ';
             const params = [cleApi];
     
-            sql.query(requete, params, (err, resultat) => {
+            db.query(requete, params, (err, resultat) => {
                 if (err) {
                     console.log(`Erreur sqlState ${erreur.sqlState} : ${erreur.sqlMessage}`);
                     reject(erreur);
