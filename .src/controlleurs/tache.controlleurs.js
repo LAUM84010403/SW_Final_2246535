@@ -183,10 +183,10 @@ supprimerTache: (req, res) => {
     .then((resultat) => {
         modelTache.trouverTacheBD(req.body.id)
         .then(resultat => {
-            modelTache.supprimerTache(req.params.id)
+            modelTache.supprimerTache(req.query.id)
             .then(resultat => {
                 res.send({
-                    message: "La tâche " + [req.params.id] + " fût supprimée avec succès!",
+                    message: "La tâche " + [req.query.id] + " fût supprimée avec succès!",
                 });
             })
             .catch((erreur) => {
@@ -201,7 +201,7 @@ supprimerTache: (req, res) => {
             console.log('Erreur : ', erreur);
             res.status(500);
             res.send({
-                message: "La tâche n'existe pas, est-ce le bon ID:" + [req.params.id]
+                message: "La tâche n'existe pas, est-ce le bon ID:" + [req.query.id]
             });
             });
     })
