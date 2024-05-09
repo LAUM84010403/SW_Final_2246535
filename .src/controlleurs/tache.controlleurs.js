@@ -8,40 +8,44 @@ const modelSousTache = require('../models/sousTache.model');
 module.exports = {
 
 afficherTousTaches: (req, res) => {
-    if (!req.query.id) {
-        res.status(400);
-        res.send("Il manque le ID utilisateur; '/api/tache/tous?id=[id de l'utilisateur]'");
-        return;
-    }
-
-    modelUtilisateur.trouverUsagerBD(req.headers.authorization)
+    modelUtilisateur.validationCle(req.headers.authorization)
     .then((resultat) => {
-        if (req.query.complete == "true") {
-            modelTache.obtenirTousTacheBD(resultat, true)
-            .then(result => {
-                res.send(result);
-            })
-            .catch(error => {
-                console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
-                res.status(500).json({ error: 'Erreur serveur' });
-            });
+        modelUtilisateur.trouverUsagerBD(req.headers.authorization)
+        .then((resultat) => {
+            if (req.query.complete == "true") {
+                modelTache.obtenirTousTacheBD(resultat, true)
+                .then(result => {
+                    res.send(result);
+                })
+                .catch(error => {
+                    console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
+                    res.status(500).json({ error: 'Erreur serveur' });
+                });
 
-        } else {
-            modelTache.obtenirTousTacheBD(resultat, false)
-            .then(result => {
-                res.send(result);
-            })
-            .catch(error => {
-                console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
-                res.status(500).json({ error: 'Erreur serveur' });
+            } else {
+                modelTache.obtenirTousTacheBD(resultat, false)
+                .then(result => {
+                    res.send(result);
+                })
+                .catch(error => {
+                    console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
+                    res.status(500).json({ error: 'Erreur serveur' });
+                });
+            }
+        })
+        .catch((erreur) => {
+            console.log('Erreur : ', erreur);
+            res.status(500);
+            res.send({
+                message: "L'utilisateur n'a pas été trouvé!"
             });
-        }
+        })
     })
     .catch((erreur) => {
         console.log('Erreur : ', erreur);
         res.status(500);
         res.send({
-            message: "L'utilisateur n'a pas été trouvé!"
+            message: "Votre clé Api n'est pas bonne!"
         });
     })
 
