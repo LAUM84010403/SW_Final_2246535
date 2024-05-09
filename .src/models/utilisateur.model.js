@@ -48,14 +48,14 @@ module.exports = {
                     console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
                     reject(err);
                 }
-                resolve(resultat.rows);
+                resolve(resultat.rows[0].id);
             });
         });
     },
 
     validationCle: (cleApi) => {
         return new Promise((resolve, reject) => {
-            
+
             const requete = 'SELECT COUNT(*) AS usager FROM utilisateur u WHERE cle_api = $1; ';
             const params = [cleApi];
             
