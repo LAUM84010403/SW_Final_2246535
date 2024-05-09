@@ -15,7 +15,7 @@ afficherTousTaches: (req, res) => {
         .then((resultat) => {
             console.log("résultT = " + resultat)
             if (req.query.complete == "true") {
-                modelTache.obtenirTousTacheBD(resultat, true)
+                modelTache.obtenirTousTacheBD(resultat[0].id, true)
                 .then(result => {
                     console.log("résult = " + result)
                     res.send(result);
@@ -27,7 +27,7 @@ afficherTousTaches: (req, res) => {
                 });
 
             } else {
-                modelTache.obtenirTousTacheBD(resultat, false)
+                modelTache.obtenirTousTacheBD(resultat[0].id, false)
                 .then(result => {
                     res.send(result);
                 })
