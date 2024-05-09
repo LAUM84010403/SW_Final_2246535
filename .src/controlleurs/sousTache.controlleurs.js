@@ -9,7 +9,7 @@ module.exports = {
 afficherSousTaches: (req, res) => {
     let message = "";
     if (!req.query.id) {
-        message += "id, ";
+        message += "id de la tache manquant";
     }
     if (msgErreur != "") {
         res.status(400);

@@ -44,7 +44,7 @@ router.post('/sous/supprimer', controllerSousTache.supprimerSousTache)
 //AFFICHER TOUTES LES TÂCHES
 router.get('/tous', controllerTache.afficherTousTaches);
 //AFFICHER SOUS-TACHE
-router.get('/tous', controllerSousTache.afficherSousTaches);
+router.get('/sous/tous', controllerSousTache.afficherSousTaches);
 
 
 //Afficher Page
