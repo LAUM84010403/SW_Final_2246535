@@ -69,6 +69,7 @@ creerSousTache: (req, res) => {
         });
         return;
     };
+    
     modelUtilisateur.validationCle(req.headers.authorization)
     .then((resultat) => {
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
