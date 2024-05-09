@@ -14,10 +14,10 @@ afficherTousTaches: (req, res) => {
         return;
     }
 
-    modelUtilisateur.validationCle(req.headers.authorization)
+    modelUtilisateur.trouverUsagerBD(req.headers.authorization)
     .then((resultat) => {
         if (req.query.complete == "true") {
-            modelTache.obtenirTousTacheBD(req.query.id, true)
+            modelTache.obtenirTousTacheBD(resultat, true)
             .then(result => {
                 res.send(result);
             })
@@ -27,7 +27,7 @@ afficherTousTaches: (req, res) => {
             });
 
         } else {
-            modelTache.obtenirTousTacheBD(req.query.id, false)
+            modelTache.obtenirTousTacheBD(resultat, false)
             .then(result => {
                 res.send(result);
             })
@@ -41,7 +41,7 @@ afficherTousTaches: (req, res) => {
         console.log('Erreur : ', erreur);
         res.status(500);
         res.send({
-            message: "Votre clé Api n'est pas bonne!"
+            message: "L'utilisateur n'a pas été trouvé!"
         });
     })
 
