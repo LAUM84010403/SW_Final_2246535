@@ -8,14 +8,18 @@ const modelSousTache = require('../models/sousTache.model');
 module.exports = {
 
 afficherTousTaches: (req, res) => {
+    
     modelUtilisateur.validationCle(req.headers.authorization)
     .then((resultat) => {
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
         .then((resultat) => {
+            console.log("résultT = " + resultat)
             if (req.query.complete == "true") {
                 modelTache.obtenirTousTacheBD(resultat, true)
                 .then(result => {
+                    console.log("résult = " + result)
                     res.send(result);
+                    
                 })
                 .catch(error => {
                     console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
