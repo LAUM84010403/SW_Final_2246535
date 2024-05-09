@@ -5,6 +5,52 @@ const modelUtilisateur = require('../models/utilisateur.model');
 const modelSousTache = require('../models/sousTache.model');
 
 module.exports = {
+
+afficherSousTaches: (req, res) => {
+    let message = "";
+    if (!req.query.id) {
+        message += "id, ";
+    }
+    if (msgErreur != "") {
+        res.status(400);
+        res.send({
+            champ_manquant: msgErreur
+        });
+        return;
+    };
+
+    modelUtilisateur.validationCle(req.headers.authorization)
+    .then((resultat) => {
+        modelUtilisateur.trouverUsagerBD(req.headers.authorization)
+        .then((resultat) => {
+            modelSousTache.trouverSousTacheBD(resultat[0].id, true)
+                .then(result => {
+                    console.log("résult = " + result)
+                    res.send(result);
+                })
+                .catch(error => {
+                    console.error('Un erreur est survenue au moment de la récupération des sous-tâches :', error);
+                    res.status(500).json({ error: 'Erreur serveur' });
+                });
+        })
+        .catch((erreur) => {
+            console.log('Erreur : ', erreur);
+            res.status(500);
+            res.send({
+                message: "L'utilisateur n'a pas été trouvé!"
+            });
+        })
+    })
+    .catch((erreur) => {
+        console.log('Erreur : ', erreur);
+        res.status(500);
+        res.send({
+            message: "Votre clé Api n'est pas bonne!"
+        });
+    })
+
+},
+
 creerSousTache: (req, res) => {
     let msgErreur = "";
     if (!req.body.id) {

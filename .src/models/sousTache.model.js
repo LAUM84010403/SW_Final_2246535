@@ -26,7 +26,7 @@ module.exports = {
     trouverSousTacheBD: (id_sous_tache) => {
         return new Promise((resolve, reject) => {
 
-            const requete = `SELECT * FROM sous_taches WHERE id = $1`;
+            const requete = `SELECT * FROM sous_taches WHERE tache_id = $1`;
             const params = [id_sous_tache];
 
             db.query(requete, params, (err, resultat) => {

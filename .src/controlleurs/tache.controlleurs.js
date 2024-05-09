@@ -7,13 +7,11 @@ const modelSousTache = require('../models/sousTache.model');
 
 module.exports = {
 
-afficherTousTaches: (req, res) => {
-    
+afficherTousTaches: (req, res) => {    
     modelUtilisateur.validationCle(req.headers.authorization)
     .then((resultat) => {
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
         .then((resultat) => {
-            console.log("résultT = " + resultat[0].id)
             if (req.query.complete == "true") {
                 modelTache.obtenirTousTacheBD(resultat[0].id, true)
                 .then(result => {
@@ -25,7 +23,6 @@ afficherTousTaches: (req, res) => {
                     console.error('Un erreur est survenue au moment de la récupération des tâches :', error);
                     res.status(500).json({ error: 'Erreur serveur' });
                 });
-
             } else {
                 modelTache.obtenirTousTacheBD(resultat[0].id, false)
                 .then(result => {
