@@ -11,10 +11,10 @@ afficherSousTaches: (req, res) => {
     if (!req.query.id) {
         message += "id de la tache manquant";
     }
-    if (msgErreur != "") {
+    if (message != "") {
         res.status(400);
         res.send({
-            champ_manquant: msgErreur
+            champ_manquant: message
         });
         return;
     };
@@ -25,7 +25,6 @@ afficherSousTaches: (req, res) => {
         .then((resultat) => {
             modelSousTache.trouverSousTacheBD(resultat[0].id, true)
                 .then(result => {
-                    console.log("résult = " + result)
                     res.send(result);
                 })
                 .catch(error => {
