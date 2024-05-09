@@ -23,7 +23,7 @@ afficherSousTaches: (req, res) => {
     .then((resultat) => {
         modelUtilisateur.trouverUsagerBD(req.headers.authorization)
         .then((resultat) => {
-            modelSousTache.trouverSousTacheBD(resultat[0].id, true)
+            modelSousTache.trouverSousTacheBD(req.query.id, true)
                 .then(result => {
                     res.send(result);
                 })
