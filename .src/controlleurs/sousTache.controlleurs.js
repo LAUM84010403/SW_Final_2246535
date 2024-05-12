@@ -207,6 +207,14 @@ modifierStatusSousTache: (req, res) => {
         msgErreur += "complet doit être true / false";
     }
 
+    let statut
+    if (req.body.complet == true){
+        statut = false
+    }
+    if (req.body.complet == false){
+        statut = true
+    }
+
     if (msgErreur != "") {
         res.status(400);
         res.send({
@@ -219,10 +227,10 @@ modifierStatusSousTache: (req, res) => {
     .then((resultat) => {
         modelSousTache.trouverSousTacheBD(req.query.id)
         .then(resultat => {
-            modelSousTache.modifierStatusSousTacheDB(req.body.complet, req.query.id)
+            modelSousTache.modifierStatusSousTacheDB(statut, req.query.id)
             .then(resultat => {
                 res.send({
-                    message: "Le statue de la sous tâche " + [req.query.id] + " fût supprimée avec succès!",
+                    message: "Le statue de la sous tâche " + [req.query.id] + " fût modifié avec succès!",
                 });
             })
             .catch((erreur) => {
