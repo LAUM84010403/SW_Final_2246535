@@ -1,7 +1,145 @@
 {
-    "openapi": "3.1.0",
-    "info":{
-        "title": "Démo API",
-        "version": "1.0.0"
+"openapi": "3.1.0",
+"info":{
+    "title": "Démo API",
+    "version": "1.0.0"
+},
+    "endpoints": [
+        {
+        "url": "/taches/ajouter",
+        "method": "POST",
+        "description": "Créer une nouvelle tâche",
+        "parameters": [
+            {
+            "name": "titre",
+            "type": "string",
+            "required": true,
+            "description": "Le titre de la tâche"
+            },
+            {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "description": "La description de la tâche"
+            },
+            {
+            "name": "date_debut",
+            "type": "string (format: YYYY-MM-DD)",
+            "required": true,
+            "description": "La date de début de la tâche"
+            },
+            {
+            "name": "date_echeance",
+            "type": "string (format: YYYY-MM-DD)",
+            "required": true,
+            "description": "La date d'échéance de la tâche"
+            },
+            {
+            "name": "complet",
+            "type": "boolean",
+            "required": true,
+            "description": "Le statut de complétion de la tâche (true/false)"
+            }
+        ]
+        },
+        {
+        "url": "/taches/modifier",
+        "method": "POST",
+        "description": "Modifier une tâche existante",
+        "parameters": [
+            {
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "L'identifiant unique de la tâche à modifier"
+            },
+            {
+            "name": "titre",
+            "type": "string",
+            "required": true,
+            "description": "Le nouveau titre de la tâche"
+            },
+            {
+            "name": "description",
+            "type": "string",
+            "required": true,
+            "description": "La nouvelle description de la tâche"
+            },
+            {
+            "name": "date_debut",
+            "type": "string (format: YYYY-MM-DD)",
+            "required": true,
+            "description": "La nouvelle date de début de la tâche"
+            },
+            {
+            "name": "date_echeance",
+            "type": "string (format: YYYY-MM-DD)",
+            "required": true,
+            "description": "La nouvelle date d'échéance de la tâche"
+            },
+            {
+            "name": "complet",
+            "type": "boolean",
+            "required": true,
+            "description": "Le nouveau statut de complétion de la tâche (true/false)"
+            },
+            {
+            "url": "/sous-taches/ajouter",
+            "method": "POST",
+            "description": "Créer une nouvelle sous-tâche",
+            "parameters": [
+                {
+                "name": "id",
+                "type": "integer",
+                "required": true,
+                "description": "L'identifiant de la tâche parent à laquelle la sous-tâche sera associée"
+                },
+                {
+                "name": "titre",
+                "type": "string",
+                "required": true,
+                "description": "Le titre de la sous-tâche"
+                },
+                {
+                "name": "complete",
+                "type": "boolean",
+                "required": true,
+                "description": "Le statut de complétion de la sous-tâche (true/false)"
+                }
+            ]
+            },
+            {
+            "url": "/sous-taches/modifier",
+            "method": "POST",
+            "description": "Modifier une sous-tâche existante",
+            "parameters": [
+                {
+                "name": "id",
+                "type": "integer",
+                "required": true,
+                "description": "L'identifiant unique de la sous-tâche à modifier"
+                },
+                {
+                "name": "tache_id",
+                "type": "integer",
+                "required": true,
+                "description": "Le nouvel identifiant de la tâche parent à laquelle la sous-tâche sera associée"
+                },
+                {
+                "name": "titre",
+                "type": "string",
+                "required": true,
+                "description": "Le nouveau titre de la sous-tâche"
+                },
+                {
+                "name": "complete",
+                "type": "boolean",
+                "required": true,
+                "description": "Le nouveau statut de complétion de la sous-tâche (true/false)"
+                }
+            ]
+            }
+        ]
     }
+    ]
 }

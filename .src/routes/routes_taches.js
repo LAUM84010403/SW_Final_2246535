@@ -18,6 +18,8 @@ router.get('/', (req, res) => {
 
 //AJOUTER UN UTILISATEUR
 router.post('/usager', controllerUtilisateur.ajouterUnUtilisateur)
+//CHANGER CLÉ API
+router.post('/usager', controllerUtilisateur.modifierAPI)
 //SITE DE USAGER
 router.get('/usager', (req, res) => {
     res.send("<h1>Utilisateur, page!</h1>")

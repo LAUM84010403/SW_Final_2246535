@@ -68,5 +68,25 @@ module.exports = {
             });
         });
     },
+    modifierAPIBD: (req) => {
+        return new Promise((resolve, reject) => {
+
+                mdpHash = mdpHash.substring(0, 30);
+                let cle = uuidv4.v4();
+                cle = cle.substring(0, 30);
+                const query = `INSERT INTO utilisateur(cle_api) VALUES ($1)`;    
+                const params = [cle];
+            
+                db.query(query, params, (err, resultat) => {
+                        if (err) {
+                            console.log('Erreur sqlState : ' + err);
+                            console.log(`Erreur sqlState ${err.sqlState} : ${err.sqlMessage}`);
+                            reject(err);
+                        } else {
+                            resolve("Votre clé api NOUVELLEMENT PERSONELLE:D : " + cle);
+                        }
+                    });
+                })
+        },
 
 };
